@@ -16,8 +16,14 @@ export const Container = styled.div`
     background: rgba(0, 0, 0, 0.05);
     box-shadow: 0 5px 15px 1px rgba(223, 83, 75, 0.2);
 
-    @media (min-width: 420px) {
+    @media (min-width: 600px) {
       width: 60%;
+      padding: 30px;
+    }
+
+    @media (min-width: 720px) {
+      width: 50%;
+      max-width: 580px;
       padding: 30px;
     }
 

@@ -52,4 +52,10 @@ export const Container = styled.div`
     left: 15%;
     padding: 15px 30px;
   }
+
+  @media (min-width: 720px) {
+    width: 70%;
+    left: 15%;
+    padding: 15px 30px;
+  }
 `;

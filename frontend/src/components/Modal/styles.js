@@ -19,6 +19,16 @@ export const Container = styled.div`
   animation: alert 0.3s;
   box-shadow: 0 5px 10px 0 #999;
 
+  @media (min-width: 720px) {
+    width: 70%;
+    left: 15%;
+  }
+
+  @media (min-width: 900px) {
+    width: 50%;
+    left: 25%;
+  }
+
   span {
     position: absolute;
     top: 15px;
@@ -49,6 +59,11 @@ export const Container = styled.div`
     @media (min-width: 420px) {
       width: 60%;
       padding: 30px;
+    }
+
+    @media (min-width: 720px) {
+      width: 90%;
+      padding: 10px;
     }
 
     h1 {
