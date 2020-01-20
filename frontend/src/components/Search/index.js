@@ -30,7 +30,7 @@ const Search = props => {
     <Container>
       <header>
         <img src={Hospital} alt="crm" />
-        <h1>Cosultar CRM ↴</h1>
+        <h1>Consultar CRM ↴</h1>
       </header>
       <form onSubmit={searchDoctor}>
         <select onChange={stateChange} name="uf" id="uf">
@@ -47,7 +47,7 @@ const Search = props => {
           onChange={e => setCrm(e.target.value)}
           value={crm}
           type="text"
-          placeholder="Digite o CRM do medico"
+          placeholder="Digite o CRM do médico"
           name="name"
         />
         <button>

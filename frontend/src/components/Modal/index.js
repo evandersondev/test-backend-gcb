@@ -10,6 +10,7 @@ const Modal = props => {
   const [state, setState] = useState([]);
   const [county, setCounty] = useState([]);
   const specialty = props.doctor[0].specialty.split(",");
+  const [isState, setIsState] = useState(false);
 
   const closeAlert = () => {
     props.setBlur(false);
@@ -40,7 +41,6 @@ const Modal = props => {
 
   useEffect(() => {
     getState();
-    console.log(specialty);
   }, []);
 
   const getState = async () => {
@@ -51,12 +51,24 @@ const Modal = props => {
     await setState(data);
   };
 
+  const stateChange = e => {
+    const { id, sigla } = JSON.parse(e.target.value);
+    getCounty(id);
+    setDoctor({ ...doctor, state: sigla });
+    setIsState(true);
+  };
+
   const getCounty = async id => {
     const { data } = await axios.get(
       `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${id}/municipios`
     );
 
     await setCounty(data);
+  };
+
+  const countyChange = e => {
+    const { nome, microrregiao } = JSON.parse(e.target.value);
+    setDoctor({ ...doctor, county: nome, city: microrregiao.nome });
   };
 
   const specialtyChange1 = async e => {
@@ -69,6 +81,14 @@ const Modal = props => {
     if (!(e.target.value === "")) {
       setDoctor({ ...doctor, specialty2: e.target.value });
     }
+  };
+
+  const deleteDoctor = async e => {
+    e.preventDefault();
+
+    await api.delete(`/doctors/${doctor.id}`);
+
+    window.location = "/";
   };
 
   return (
@@ -96,16 +116,13 @@ const Modal = props => {
         />
 
         <div className="form-group">
-          <select
-            onChange={e => setDoctor({ ...doctor, state: e.target.value })}
-            name="state"
-          >
+          <select onChange={stateChange} name="state">
             <option value="{}">"UF"</option>
             {state.map(state => {
               return (
                 <option
                   key={state.id}
-                  value={state.sigla}
+                  value={JSON.stringify(state)}
                   selected={doctor.state === state.sigla}
                 >
                   {state.sigla}
@@ -124,20 +141,26 @@ const Modal = props => {
             maxLength="4"
           />
 
-          <select name="county">
-            <option value={doctor.county}>{doctor.county}</option>
-            {county.map(county => {
-              return (
-                <option
-                  key={county.id}
-                  value={county.nome}
-                  selected={doctor.county === county.nome}
-                >
-                  {county.nome}
-                </option>
-              );
-            })}
-          </select>
+          {isState ? (
+            <select name="county" id="county" onChange={countyChange}>
+              <option value="{}">Município</option>
+              {county.map(county => {
+                return (
+                  <option key={county.id} value={JSON.stringify(county)}>
+                    {county.nome}
+                  </option>
+                );
+              })}
+            </select>
+          ) : (
+            <input
+              type="text"
+              name="county"
+              placeholder="Município"
+              disabled
+              value={doctor.county}
+            />
+          )}
         </div>
         <div name="specialty" className="specialty-group">
           <select onChange={specialtyChange1} className="specialty">
@@ -166,7 +189,10 @@ const Modal = props => {
             ))}
           </select>
         </div>
-        <button>Atualizar</button>
+        <div className="btn-group">
+          <button onClick={deleteDoctor}>Deletar</button>
+          <button type="submit">Atualizar</button>
+        </div>
       </form>
     </Container>
   );

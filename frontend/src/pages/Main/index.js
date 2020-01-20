@@ -37,6 +37,7 @@ const Main = () => {
     getState();
   }, []);
 
+  // fecth all states api ibge
   const getState = async () => {
     const { data } = await axios.get(
       "https://servicodados.ibge.gov.br/api/v1/localidades/estados"
@@ -45,6 +46,7 @@ const Main = () => {
     await setState(data);
   };
 
+  // fecth all county for state selected
   const getCounty = async id => {
     const { data } = await axios.get(
       `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${id}/municipios`

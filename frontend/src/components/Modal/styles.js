@@ -109,16 +109,23 @@ export const Container = styled.div`
       }
     }
 
-    button {
+    .btn-group {
       width: 100%;
       height: 30px;
-      border: 0;
-      background: #df534b;
-      padding: 0 30px;
-      color: #fff;
-      font-weight: bold;
-      border-radius: 5px;
-      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        width: 48%;
+        height: 100%;
+        border: 0;
+        background: #df534b;
+        padding: 0 30px;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+      }
     }
   }
 `;

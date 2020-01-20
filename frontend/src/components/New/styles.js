@@ -57,9 +57,13 @@ export const Container = styled.div`
       }
 
       select {
-        width: 150px;
+        min-width: 50px;
         border: 0;
         background: transparent;
+
+        &:last-child {
+          min-width: 180px;
+        }
       }
     }
 

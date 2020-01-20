@@ -10,7 +10,10 @@ const Navbar = () => {
         <h1>GCB</h1>
       </a>
       <ul>
-        <a target="_blank" href="https://github.com/evansCodes">
+        <a
+          target="_blank"
+          href="https://github.com/evansCodes/test-backend-gcb"
+        >
           {<FaGithub />}
         </a>
         <a

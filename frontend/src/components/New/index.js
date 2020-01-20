@@ -9,7 +9,7 @@ const New = props => {
   return (
     <Container>
       <form onSubmit={props.formSubmit} method="POST">
-        <h1>Cadastrar novo medico</h1>
+        <h1>Cadastrar médico</h1>
         <input
           name="name"
           type="text"
@@ -49,7 +49,7 @@ const New = props => {
           />
 
           <select name="county" onChange={props.countyChange}>
-            <option value="{}">Municipio</option>
+            <option value="{}">Município</option>
             {county.map(county => {
               return (
                 <option key={county.id} value={JSON.stringify(county)}>
